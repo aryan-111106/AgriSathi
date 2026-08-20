@@ -216,7 +216,6 @@ class TelegramService:
             "reply_markup": {
                 "keyboard": rows,
                 "resize_keyboard": True,
-                "is_persistent": True,
                 "selective": False,
             },
         }
