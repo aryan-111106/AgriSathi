@@ -11,6 +11,30 @@ def test_intent_classification():
     assert ai_orchestrator.classify_intent("menu") == "MENU"
 
 
+def test_intent_classification_botfather_commands():
+    """BotFather Menu Button commands must route to correct intents."""
+    assert ai_orchestrator.classify_intent("/start") == "GREETING"
+    assert ai_orchestrator.classify_intent("/menu") == "MENU"
+    assert ai_orchestrator.classify_intent("/weather") == "WEATHER"
+    assert ai_orchestrator.classify_intent("/mandi") == "MARKET_PRICE"
+    assert ai_orchestrator.classify_intent("/crop") == "CROP_ADVICE"
+    assert ai_orchestrator.classify_intent("/disease") == "DISEASE_DIAGNOSIS"
+    assert ai_orchestrator.classify_intent("/pest") == "PEST_IDENTIFICATION"
+    assert ai_orchestrator.classify_intent("/fertilizer") == "FERTILIZER_SOIL"
+    assert ai_orchestrator.classify_intent("/economy") == "FARM_ECONOMICS"
+    assert ai_orchestrator.classify_intent("/schemes") == "GOVERNMENT_SCHEME"
+    assert ai_orchestrator.classify_intent("/expert") == "EXPERT_HELP"
+
+
+def test_intent_classification_keyboard_buttons():
+    """Persistent reply keyboard button text must route to intents."""
+    assert ai_orchestrator.classify_intent("🌦️ আবহাওয়া") == "WEATHER"
+    assert ai_orchestrator.classify_intent("💰 বাজার দর") == "MARKET_PRICE"
+    assert ai_orchestrator.classify_intent("📷 রোগ নির্ণয়") == "DISEASE_DIAGNOSIS"
+    assert ai_orchestrator.classify_intent("🌦️ Weather") == "WEATHER"
+    assert ai_orchestrator.classify_intent("🏛️ Govt Schemes") == "GOVERNMENT_SCHEME"
+
+
 def test_intent_classification_banglish():
     """PRD §30 — Bengali-English code-switching must classify correctly."""
     assert ai_orchestrator.classify_intent("কাল weather কেমন থাকবে?") == "WEATHER"
@@ -160,4 +184,74 @@ async def test_telegram_chat_id_persisted(test_db):
     res = await test_db.execute(stmt)
     farmer = res.scalar_one()
     assert farmer.telegram_chat_id == phone
+
+
+@pytest.mark.asyncio
+async def test_language_persists_after_english_message(test_db):
+    """Once a farmer is onboarded, their language preference must stick
+    even when they send short English keywords like 'menu' or '1'."""
+    phone = "910000005555"
+
+    # Complete full onboarding in Bengali
+    await ai_orchestrator.process_message(test_db, phone, "বাংলা")
+    await ai_orchestrator.process_message(test_db, phone, "Hooghly")
+    await ai_orchestrator.process_message(test_db, phone, "Arambagh")
+    await ai_orchestrator.process_message(test_db, phone, "Singur")
+    await ai_orchestrator.process_message(test_db, phone, "3 bigha")
+    await ai_orchestrator.process_message(test_db, phone, "Potato")
+    await ai_orchestrator.process_message(test_db, phone, "skip")  # phone step
+
+    # Farmer types "menu" — English keyword, used to overwrite lang
+    await ai_orchestrator.process_message(test_db, phone, "menu")
+
+    from sqlalchemy import select
+    from app.models import FarmerProfile
+    stmt = select(FarmerProfile).where(FarmerProfile.phone == phone)
+    res = await test_db.execute(stmt)
+    farmer = res.scalar_one()
+    # Language MUST still be Bengali
+    assert farmer.preferred_language == "bn"
+    assert farmer.is_onboarded is True
+
+
+@pytest.mark.asyncio
+async def test_start_routes_to_language_for_new_farmer(test_db):
+    """/start for an unonboarded farmer must trigger the language picker."""
+    phone = "910000006666"
+    r = await ai_orchestrator.process_message(test_db, phone, "/start")
+    # Status should be onboarding_started (language picker sent)
+    assert r["status"] == "onboarding_started"
+
+
+@pytest.mark.asyncio
+async def test_start_routes_to_menu_for_onboarded_farmer(test_db):
+    """/start for an already-onboarded farmer must send the menu + keyboard."""
+    phone = "910000007777"
+    await ai_orchestrator.process_message(test_db, phone, "English")
+    await ai_orchestrator.process_message(test_db, phone, "Hooghly")
+    await ai_orchestrator.process_message(test_db, phone, "Arambagh")
+    await ai_orchestrator.process_message(test_db, phone, "Singur")
+    await ai_orchestrator.process_message(test_db, phone, "2 bigha")
+    await ai_orchestrator.process_message(test_db, phone, "Rice")
+    await ai_orchestrator.process_message(test_db, phone, "skip")
+
+    r = await ai_orchestrator.process_message(test_db, phone, "/start")
+    # After onboarding, /start should reach the GREETING intent path
+    assert r["status"] == "success"
+    assert r["intent"] == "GREETING"
+
+
+@pytest.mark.asyncio
+async def test_default_language_from_settings(test_db, monkeypatch):
+    """The DEFAULT_LANGUAGE env var must be honored on new farmer creation."""
+    from app.config import settings
+    monkeypatch.setattr(settings, "default_language", "en")
+    phone = "910000008888"
+    await ai_orchestrator.process_message(test_db, phone, "Hello")
+    from sqlalchemy import select
+    from app.models import FarmerProfile
+    stmt = select(FarmerProfile).where(FarmerProfile.phone == phone)
+    res = await test_db.execute(stmt)
+    farmer = res.scalar_one()
+    assert farmer.preferred_language == "en"
 
