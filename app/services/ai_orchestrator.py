@@ -139,12 +139,55 @@ class AIOrchestrator:
             out = out.replace(bn, " " + lat + " ")
         return out
 
+    # BotFather Menu Button command → intent mapping
+    COMMAND_INTENT_MAP = {
+        "/start": "GREETING",
+        "/menu": "MENU",
+        "/weather": "WEATHER",
+        "/mandi": "MARKET_PRICE",
+        "/crop": "CROP_ADVICE",
+        "/disease": "DISEASE_DIAGNOSIS",
+        "/pest": "PEST_IDENTIFICATION",
+        "/fertilizer": "FERTILIZER_SOIL",
+        "/economy": "FARM_ECONOMICS",
+        "/schemes": "GOVERNMENT_SCHEME",
+        "/expert": "EXPERT_HELP",
+    }
+
     def classify_intent(self, text: str, has_image: bool = False) -> str:
         """Fast rule-based + semantic intent classification with Banglish support."""
         if has_image:
             return "DISEASE_DIAGNOSIS"
 
         t = text.lower().strip()
+
+        # BotFather menu commands (e.g. /weather, /mandi)
+        if t in self.COMMAND_INTENT_MAP:
+            return self.COMMAND_INTENT_MAP[t]
+
+        # Persistent reply-keyboard button text (3x3 grid)
+        KEYBOARD_BTN_MAP = {
+            "🌦️ আবহাওয়া": "WEATHER",
+            "🌦️ weather": "WEATHER",
+            "💰 বাজার দর": "MARKET_PRICE",
+            "💰 mandi prices": "MARKET_PRICE",
+            "🌱 ফসল পরামর্শ": "CROP_ADVICE",
+            "🌱 crop advice": "CROP_ADVICE",
+            "📷 রোগ নির্ণয়": "DISEASE_DIAGNOSIS",
+            "📷 disease diagnosis": "DISEASE_DIAGNOSIS",
+            "🐛 পোকা নিয়ন্ত্রণ": "PEST_IDENTIFICATION",
+            "🐛 pest control": "PEST_IDENTIFICATION",
+            "🧪 সারের হিসাব": "FERTILIZER_SOIL",
+            "🧪 fertilizer": "FERTILIZER_SOIL",
+            "📊 চাষের খরচ-লাভ": "FARM_ECONOMICS",
+            "📊 farm economics": "FARM_ECONOMICS",
+            "🏛️ সরকারি প্রকল্প": "GOVERNMENT_SCHEME",
+            "🏛️ govt schemes": "GOVERNMENT_SCHEME",
+            "👨‍🌾 বিশেষজ্ঞ": "EXPERT_HELP",
+            "👨‍🌾 expert": "EXPERT_HELP",
+        }
+        if t in KEYBOARD_BTN_MAP:
+            return KEYBOARD_BTN_MAP[t]
 
         # Menu requests
         if t in ["menu", "help", "সাহায্য", "মেনু", "তালিকা", "1", "2", "3", "4", "5", "6", "7", "8", "9", "hi", "hello", "নমস্কার"]:
@@ -401,36 +444,20 @@ class AIOrchestrator:
         return self.get_main_menu(farmer.preferred_language, farmer.name), None, True
 
     def get_main_menu(self, lang: str = "bn", farmer_name: Optional[str] = None) -> str:
-        """Returns the standard 9-item WhatsApp Agricultural Menu."""
+        """Short welcome line — the actual menu is the Telegram persistent
+        reply keyboard + BotFather Menu Button, not a text dump."""
+        name_part = f", {farmer_name}" if farmer_name and farmer_name != "Farmer" else ""
         if lang == "bn":
             return (
-                "🌾 *AgriSaathi (কৃষি সাথী) — প্রধান মেনু*\n\n"
-                "আমি আপনাকে কীভাবে সাহায্য করতে পারি? নিচের তালিকা থেকে নম্বর বেছে নিন বা সরাসরি প্রশ্ন লিখুন:\n\n"
-                "1️⃣ 🌦️ *আবহাওয়া ও কৃষি সতর্কতা* (Weather)\n"
-                "2️⃣ 💰 *আজকের পাইকারি বাজার দর* (Mandi Prices)\n"
-                "3️⃣ 🌱 *ফসল পরিচর্যা ও পরামর্শ* (Crop Advice)\n"
-                "4️⃣ 📷 *রোগ নির্ণয় (গাছের পাতার ছবি পাঠান)*\n"
-                "5️⃣ 🐛 *পোকা-মাকড় নিয়ন্ত্রণ* (Pest Control)\n"
-                "6️⃣ 🧪 *সারের হিসাব ও মাটির যত্ন* (Fertilizer Calculator)\n"
-                "7️⃣ 📊 *চাষের বাজেট ও সম্ভাব্য লাভ* (Farm Economics)\n"
-                "8️⃣ 🏛️ *সরকারি কৃষি প্রকল্প ও বীমা* (Govt Schemes)\n"
-                "9️⃣ 👨‍🌾 *কৃষি বিশেষজ্ঞ ও হেল্পলাইন* (Expert Help)\n\n"
-                "💬 _যেকোনো সময় বাংলায় বা ইংরেজিতে প্রশ্ন লিখতে পারেন বা ভয়েস মেসেজ পাঠাতে পারেন!_"
-            )
+                "🌾 *AgriSaathi (কৃষি সাথী)-তে আবার স্বাগতম!*{name}\n\n"
+                "নিচের বাটনগুলো ব্যবহার করুন অথবা সরাসরি বাংলা/ইংরেজিতে প্রশ্ন লিখুন।\n"
+                "_ভয়েস মেসেজ, ছবি, বা GPS লোকেশনও পাঠাতে পারেন।_"
+            ).format(name=name_part)
         return (
-            "🌾 *AgriSaathi — Main Menu*\n\n"
-            "How can I assist your farming today? Reply with a number or ask directly in English/Bengali:\n\n"
-            "1️⃣ 🌦️ *Weather & Agrometeorological Alerts*\n"
-            "2️⃣ 💰 *Today's Mandi Market Rates*\n"
-            "3️⃣ 🌱 *Crop Advice & Growth Management*\n"
-            "4️⃣ 📷 *Disease Diagnosis (Send a Leaf Photo)*\n"
-            "5️⃣ 🐛 *Pest & Insect Identification*\n"
-            "6️⃣ 🧪 *Fertilizer Dosage & Soil Health*\n"
-            "7️⃣ 📊 *Farm Budget & Profitability*\n"
-            "8️⃣ 🏛️ *Government Schemes & Crop Insurance*\n"
-            "9️⃣ 👨‍🌾 *Agricultural Expert & Helpline*\n\n"
-            "💬 _You can also send voice notes or ask free-form questions anytime!_"
-        )
+            "🌾 *Welcome back to AgriSaathi!*{name}\n\n"
+            "Use the buttons below or type your question in English/Bengali.\n"
+            "_You can also send voice notes, photos, or GPS location._"
+        ).format(name=name_part)
 
     async def process_message(
         self,
