@@ -142,6 +142,7 @@ class AIOrchestrator:
     # BotFather Menu Button command → intent mapping
     COMMAND_INTENT_MAP = {
         "/start": "GREETING",
+        "/language": "LANGUAGE_PICK",
         "/menu": "MENU",
         "/weather": "WEATHER",
         "/mandi": "MARKET_PRICE",
@@ -565,19 +566,96 @@ class AIOrchestrator:
         final_response_text = ""
         tool_data = {}
 
-        # 1. GREETING (also handles /start for already-onboarded farmers)
+        # 1. GREETING (from /start)
+        # /start ALWAYS re-prompts language picker, regardless of history.
+        # This makes /start behave like a true "reset / restart" affordance
+        # and avoids the surprise of getting stuck in the wrong language.
         if intent == "GREETING":
-            final_response_text = self.get_main_menu(lang, farmer.name)
-            if farmer.is_onboarded:
-                # Re-attach the persistent reply keyboard for discoverability
-                from app.services.telegram_service import telegram_service
-                await telegram_service.send_main_keyboard(farmer.phone, lang)
+            farmer.is_onboarded = False
+            farmer.onboarding_step = 0
+            await db.commit()
+            # Fall through to onboarding handler below by sending the picker
+            # and returning early (the rest of the routing is irrelevant).
+            from app.services.telegram_service import telegram_service
+            welcome_text = (
+                "🌾 *নমস্কার! AgriSaathi (কৃষি সাথী)-তে আপনাকে স্বাগতম।*\n"
+                "আপনার পছন্দের ভাষা বেছে নিন / Choose your preferred language:"
+            )
+            buttons = [
+                {"id": "btn_lang_bn", "title": "বাংলা 🇧🇩"},
+                {"id": "btn_lang_en", "title": "English 🇬🇧"},
+            ]
+            await telegram_service.send_buttons(farmer.phone, welcome_text, buttons)
+            # Hide any persistent keyboard during language picker so it doesn't
+            # confuse the user with buttons that route to features they haven't
+            # been onboarded for yet.
+            await telegram_service.remove_keyboard(farmer.phone)
+            final_response_text = welcome_text
+            # Short-circuit: do not let the rest of the routing run.
+            out_msg = Message(
+                conversation_id=conv.id,
+                sender="bot",
+                direction="outbound",
+                message_type="text",
+                content=final_response_text,
+                language=lang,
+                intent=intent,
+                tool_calls=[{"_quality": {"answer_confidence": "high", "data_freshness_minutes": 0, "source_quality": "system", "safety_risk": "low", "intent": intent}}],
+            )
+            db.add(out_msg)
+            await db.commit()
+            return {
+                "status": "onboarding_started",
+                "from_phone": farmer.phone,
+                "intent": intent,
+                "language": lang,
+                "response": final_response_text,
+                "tool_data": {},
+            }
+
+        # 1b. LANGUAGE_PICK (/language) — re-prompt language without losing profile
+        elif intent == "LANGUAGE_PICK":
+            farmer.is_onboarded = False
+            farmer.onboarding_step = 0
+            farmer.preferred_language = settings.default_language or "bn"
+            await db.commit()
+            from app.services.telegram_service import telegram_service
+            welcome_text = (
+                "🌾 *ভাষা পরিবর্তন / Change Language*\n\n"
+                "আপনার পছন্দের ভাষা বেছে নিন / Choose your preferred language:"
+            )
+            buttons = [
+                {"id": "btn_lang_bn", "title": "বাংলা 🇧🇩"},
+                {"id": "btn_lang_en", "title": "English 🇬🇧"},
+            ]
+            await telegram_service.send_buttons(farmer.phone, welcome_text, buttons)
+            await telegram_service.remove_keyboard(farmer.phone)
+            final_response_text = welcome_text
+            out_msg = Message(
+                conversation_id=conv.id,
+                sender="bot",
+                direction="outbound",
+                message_type="text",
+                content=final_response_text,
+                language=lang,
+                intent=intent,
+                tool_calls=[{"_quality": {"answer_confidence": "high", "data_freshness_minutes": 0, "source_quality": "system", "safety_risk": "low", "intent": intent}}],
+            )
+            db.add(out_msg)
+            await db.commit()
+            return {
+                "status": "language_pick",
+                "from_phone": farmer.phone,
+                "intent": intent,
+                "language": lang,
+                "response": final_response_text,
+                "tool_data": {},
+            }
 
         # 2. MENU
         elif intent == "MENU":
             final_response_text = self.get_main_menu(lang, farmer.name)
-            from app.services.telegram_service import telegram_service
-            await telegram_service.send_main_keyboard(farmer.phone, lang)
+            # Keyboard is resent centrally at the end of process_message()
 
         # 3. WEATHER
         elif intent == "WEATHER":
@@ -969,6 +1047,19 @@ class AIOrchestrator:
 
         # Send via MessageBus (Telegram by default)
         await _bus().send_text(farmer.phone, final_response_text)
+
+        # Re-attach the persistent 3x3 reply keyboard after every bot reply.
+        # Telegram hides the keyboard as soon as the user sends any message,
+        # so we re-send it each turn to keep it visible. Skip when the user
+        # is still onboarding (keyboard would be premature) or when the
+        # outbound channel is not Telegram.
+        if (
+            farmer.is_onboarded
+            and settings.outbound_channel == "telegram"
+            and intent not in ("GREETING", "LANGUAGE_PICK")
+        ):
+            from app.services.telegram_service import telegram_service
+            await telegram_service.send_main_keyboard(farmer.phone, lang)
 
         return {
             "status": "success",
