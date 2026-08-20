@@ -1,0 +1,366 @@
+{
+  "crops": {
+    "potato": {
+      "name_en": "Potato",
+      "name_bn": "আলু",
+      "aliases": ["aloo", "alu", "potato", "আলু"],
+      "season": "Rabi (Winter)",
+      "sowing_period": "Late October to Mid November",
+      "harvesting_period": "January to February (75-90 days for early, 90-120 days for main)",
+      "ideal_soil": "Well-drained sandy loam or alluvial soil with pH 5.2 - 6.4",
+      "water_requirement": "400-500 mm (5-7 light irrigations). Critical stages: stolonization, tuber initiation, tuber bulking.",
+      "fertilizer_recommendation": {
+        "per_acre": {
+          "nitrogen_kg": 60,
+          "phosphorus_kg": 40,
+          "potassium_kg": 60,
+          "fym_tonnes": 8,
+          "commercial_units": "Urea: 130 kg (half at planting, half at earthing up), SSP: 250 kg (basal), MOP: 100 kg (half basal, half at earthing up)"
+        },
+        "per_bigha_bengal": {
+          "description": "For 1 Bigha (0.33 acre) in West Bengal:",
+          "urea_kg": 43,
+          "ssp_kg": 83,
+          "mop_kg": 33,
+          "boron_kg": 1.5,
+          "zinc_sulphate_kg": 3
+        }
+      },
+      "growth_stages": [
+        {"stage": "Sprouting / Emergence", "days": "0-15", "advisory_en": "Keep soil moist but avoid waterlogging.", "advisory_bn": "মাটিতে আর্দ্রতা বজায় রাখুন, অতিরিক্ত জল জমতে দেবেন না।"},
+        {"stage": "Vegetative Growth & Earthing Up", "days": "20-35", "advisory_en": "Apply remaining nitrogen and perform earthing up to prevent greening of tubers.", "advisory_bn": "বাকি ইউরিয়া সার প্রয়োগ করুন এবং মাটির ভেলি তুলে দিন (আড় বাঁধাই)।"},
+        {"stage": "Tuber Initiation", "days": "35-50", "advisory_en": "Critical irrigation stage. Monitor for late blight symptoms.", "advisory_bn": "এই সময় সেচ খুব দরকার। নাবি ধসা (Late Blight) রোগের লক্ষণ পর্যবেক্ষণ করুন।"},
+        {"stage": "Tuber Bulking", "days": "50-75", "advisory_en": "Ensure regular moisture. Avoid heavy irrigation near maturity.", "advisory_bn": "নিয়মিত পরিমিত সেচ দিন। আলু পাকার কাছাকাছি সেচ কমিয়ে দিন।"},
+        {"stage": "Maturity & Dehaulming", "days": "80-95", "advisory_en": "Cut vines 10-12 days before harvest to harden tuber skin.", "advisory_bn": "আলু তোলার ১০-১২ দিন আগে গাছের ডগা কেটে দিন যাতে আলুর খোসা শক্ত হয়।"}
+      ],
+      "common_diseases": [
+        {
+          "name_en": "Late Blight",
+          "name_bn": "নাবি ধসা রোগ (Late Blight)",
+          "pathogen": "Phytophthora infestans (Fungus-like)",
+          "symptoms_en": "Water-soaked irregular brown lesions on leaf edges/tips with white cottony mildew on undersides during cool, foggy/humid weather.",
+          "symptoms_bn": "পাতার কিনারে ভিজে কালচে বাদামী দাগ, কুয়াশাচ্ছন্ন ও আর্দ্র আবহাওয়ায় পাতার নিচে সাদা ছত্রাকের গুঁড়ো দেখা যায়।",
+          "severity": "Severe",
+          "cultural_control_en": "Avoid excess moisture, destroy infected leaves, avoid overhead sprinkler irrigation.",
+          "cultural_control_bn": "অতিরিক্ত সেচ এড়িয়ে চলুন, আক্রান্ত ডালপালা নষ্ট করুন, জমিতে জল জমতে দেবেন না।",
+          "ipm_measures_en": "Preventive spray with Mancozeb (2.5g/L) or Copper Oxychloride (3g/L) before foggy days. In case of active outbreak, systemic fungicide like Cymoxanil + Mancozeb (2g/L) under expert guidance.",
+          "ipm_measures_bn": "কুয়াশাচ্ছন্ন আবহাওয়ার আগে মেনকোজেব (২.৫ গ্রাম/লিটার) স্প্রে করুন। রোগ দেখা দিলে সায়মোক্সানিল+মেনকোজেব স্প্রে করতে পারেন বিশেষজ্ঞের পরামর্শে।"
+        },
+        {
+          "name_en": "Early Blight",
+          "name_bn": "আগাম ধসা রোগ (Early Blight)",
+          "pathogen": "Alternaria solani",
+          "symptoms_en": "Dark brown circular spots with concentric rings (target board pattern) on older lower leaves.",
+          "symptoms_bn": "নিচের পুরনো পাতায় গাঢ় বাদামী গোল দাগ এবং গোল বৃত্তের মতো রিং (Target Board) দেখা যায়।",
+          "severity": "Moderate",
+          "cultural_control_en": "Remove infected lower leaves, balance potassium and nitrogen.",
+          "cultural_control_bn": "আক্রান্ত পাতা ছিঁড়ে ফেলুন এবং পরিমিত পটাশ সার ব্যবহার করুন।",
+          "ipm_measures_en": "Spray Chlorothalonil or Mancozeb 2g/liter of water.",
+          "ipm_measures_bn": "মেনকোজেব বা ক্লোরোথ্যালোনিল ২ গ্রাম প্রতি লিটার জলে গুলে স্প্রে করুন।"
+        }
+      ],
+      "common_pests": [
+        {
+          "name_en": "Aphids (জাব পোকা)",
+          "name_bn": "জাব পোকা (Aphids)",
+          "symptoms_en": "Small greenish/black insects sucking sap from tender leaves, causing leaf curling and transmitting virus.",
+          "symptoms_bn": "কচি ডাল ও পাতার নিচে রস চুষে খায়, পাতা কোঁকড়ায় ও ভাইরাস ছড়ায়।",
+          "ipm_measures_en": "Install yellow sticky traps (15-20 per acre). Spray neem oil (5ml/L) or Imidacloprid (0.3ml/L) if threshold exceeds.",
+          "ipm_measures_bn": "হলুদ স্টিকি ট্র্যাপ ব্যবহার করুন। নিম তেল (৫ মিলি/লিটার) স্প্রে করুন।"
+        }
+      ]
+    },
+    "rice": {
+      "name_en": "Rice / Paddy",
+      "name_bn": "ধান",
+      "aliases": ["rice", "paddy", "dhan", "ধান"],
+      "season": "Kharif (Aman), Rabi (Boro), Pre-Kharif (Aus)",
+      "sowing_period": "Aman: June-July, Boro: Nov-Dec (seedbed) to Jan (transplant)",
+      "harvesting_period": "Aman: Nov-Dec, Boro: April-May",
+      "ideal_soil": "Clayey loam, heavy alluvial soil with good water retention, pH 5.5 - 7.0",
+      "water_requirement": "1000-1400 mm. Critical stages: panicle initiation, flowering, grain filling.",
+      "fertilizer_recommendation": {
+        "per_acre": {
+          "nitrogen_kg": 40,
+          "phosphorus_kg": 20,
+          "potassium_kg": 20,
+          "zinc_kg": 10,
+          "commercial_units": "Urea: 85 kg (split in 3 doses: basal, tillering, panicle initiation), DAP: 45 kg or SSP: 125 kg (all basal), MOP: 35 kg (half basal, half panicle)"
+        },
+        "per_bigha_bengal": {
+          "description": "For 1 Bigha (0.33 acre) in West Bengal (Boro/Aman):",
+          "urea_kg": 28,
+          "ssp_kg": 42,
+          "mop_kg": 12,
+          "zinc_sulphate_kg": 3
+        }
+      },
+      "growth_stages": [
+        {"stage": "Nursery / Seedling", "days": "0-25", "advisory_en": "Ensure healthy seedlings, treat seed with carbendazim/trichoderma.", "advisory_bn": "বীজ শোধন করে চারা তৈরি করুন, চারা সতেজ রাখুন।"},
+        {"stage": "Transplanting & Tillering", "days": "25-55", "advisory_en": "Maintain 2-3 cm standing water. Top dress with 1st split of urea.", "advisory_bn": "২-৩ সেমি জল ধরে রাখুন এবং প্রথম কিস্তির ইউরিয়া প্রয়োগ করুন।"},
+        {"stage": "Panicle Initiation", "days": "55-75", "advisory_en": "Apply remaining nitrogen and potash. Do not allow field to dry.", "advisory_bn": "বাকি ইউরিয়া ও পটাশ দিন। এই সময় জমিতে জল টানতে দেবেন না।"},
+        {"stage": "Flowering & Grain Filling", "days": "75-105", "advisory_en": "Critical for grain weight. Watch for stem borer and false smut.", "advisory_bn": "দানা বাঁধার সময়। মাজরা পোকা ও বাদামী শোষক পোকা থেকে সাবধান থাকুন।"},
+        {"stage": "Maturity & Harvest", "days": "110-130", "advisory_en": "Drain water 10 days before harvest when 85% grains turn golden yellow.", "advisory_bn": "ধানের ৮৫% শীষ সোনালী হলে কাটার ১০ দিন আগে জল বের করে দিন।"}
+      ],
+      "common_diseases": [
+        {
+          "name_en": "Rice Blast",
+          "name_bn": "ধানের ব্লাস্ট রোগ (Rice Blast)",
+          "pathogen": "Magnaporthe oryzae",
+          "symptoms_en": "Spindle-shaped / diamond-shaped eye spots with grey center and brown margin on leaves, neck blast causes blank heads.",
+          "symptoms_bn": "পাতায় চোখের মতো বা নৌকাকৃতি দাগ যার মাঝে ছাই রঙা ও পাড়ে বাদামী বর্ণ থাকে। শীষের গোড়ায় পচন ধরে।",
+          "severity": "Severe",
+          "cultural_control_en": "Avoid excessive nitrogen fertilizer; maintain proper plant spacing.",
+          "cultural_control_bn": "অতিরিক্ত ইউরিয়া সার দেবেন না, লাইনে দূরত্ব রেখে চারা লাগান।",
+          "ipm_measures_en": "Spray Tricyclazole 75 WP @ 0.6g/L or Isoprothiolane @ 1.5ml/L at disease onset.",
+          "ipm_measures_bn": "ট্রাইসাইক্লাজোল ৭৫ ডব্লুপি (০.৬ গ্রাম/লিটার) বা আইসোপ্রোথিওলেন স্প্রে করুন।"
+        },
+        {
+          "name_en": "Sheath Blight",
+          "name_bn": "খোল পচা রোগ (Sheath Blight)",
+          "pathogen": "Rhizoctonia solani",
+          "symptoms_en": "Greenish-grey oval or irregular lesions on leaf sheaths near waterline.",
+          "symptoms_bn": "গোড়ার দিকে পাতার খোলে জলছাপের মতো ডিম্বাকৃতি ধূসর-সবুজ দাগ।",
+          "severity": "Moderate",
+          "ipm_measures_en": "Spray Hexaconazole 5% EC (2ml/L) or Validamycin 3% L (2.5ml/L).",
+          "ipm_measures_bn": "হেক্সাকোনাজোল (২ মিলি/লিটার) বা ভ্যালিডামাইসিন স্প্রে করুন।"
+        }
+      ],
+      "common_pests": [
+        {
+          "name_en": "Yellow Stem Borer",
+          "name_bn": "হলুদ মাজরা পোকা (Stem Borer)",
+          "symptoms_en": "Dead heart at vegetative stage (drying central shoot), white ear head at heading stage.",
+          "symptoms_bn": "গাছের ডগা শুকিয়ে যাওয়া (Dead Heart) এবং শীষ বের হওয়ার সময় সাদা শীষ (White Ear)।",
+          "ipm_measures_en": "Install pheromone traps (8/acre). Apply Cartap Hydrochloride 4G @ 7.5kg/acre or spray Chlorantraniliprole 18.5% SC @ 0.3ml/L.",
+          "ipm_measures_bn": "ফেরোমোন ট্র্যাপ ব্যবহার করুন। কারটাপ হাইড্রোক্লোরাইড বা কোরাজন (০.৩ মিলি/লিটার) স্প্রে করুন।"
+        },
+        {
+          "name_en": "Brown Planthopper (BPH)",
+          "name_bn": "বাদামী গাছফড়িং / কারেন্ট পোকা (BPH)",
+          "symptoms_en": "Hopper burn: Circular patches of dried, burnt-looking plants.",
+          "symptoms_bn": "হপার বার্ন: ক্ষেতের মাঝে গোল গোল অংশের ধান গাছ পুড়ে যাওয়ার মতো শুকিয়ে যায়।",
+          "ipm_measures_en": "Create alleyways (passing rows) every 2-3 meters. Avoid excess urea. Spray Triflumezopyrim 10% SC @ 0.5ml/L or Pymetrozine 50% WDG @ 0.6g/L directed at plant base.",
+          "ipm_measures_bn": "জমিতে আলো-বাতাস চলাচলের জন্য মাঝে মাঝে পথ তৈরি করুন। পাইমেট্রোজিন বা ট্রাইফ্লুমেজোপরিম স্প্রে করুন গাছের গোড়ায়।"
+        }
+      ]
+    },
+    "mustard": {
+      "name_en": "Mustard / Rapeseed",
+      "name_bn": "সরিষা",
+      "aliases": ["mustard", "sarson", "sorisha", "সরিষা", "রাই"],
+      "season": "Rabi",
+      "sowing_period": "October to Early November",
+      "harvesting_period": "January to February (85-110 days)",
+      "ideal_soil": "Light to heavy loamy soil with good drainage, pH 6.0 - 7.5",
+      "water_requirement": "200-300 mm (2 critical irrigations: 30-35 DAS at flowering, 55-60 DAS at pod filling).",
+      "fertilizer_recommendation": {
+        "per_acre": {
+          "nitrogen_kg": 30,
+          "phosphorus_kg": 15,
+          "potassium_kg": 15,
+          "sulphur_kg": 10,
+          "commercial_units": "Urea: 65 kg (half basal, half at 1st irrigation), SSP: 95 kg (all basal - provides sulphur), MOP: 25 kg"
+        },
+        "per_bigha_bengal": {
+          "description": "For 1 Bigha (0.33 acre) in West Bengal:",
+          "urea_kg": 22,
+          "ssp_kg": 32,
+          "mop_kg": 8,
+          "bentonite_sulphur_kg": 3
+        }
+      },
+      "growth_stages": [
+        {"stage": "Vegetative", "days": "0-30", "advisory_en": "Thinning at 15-20 days to maintain 10-15 cm plant spacing.", "advisory_bn": "১৫-২০ দিনে চারা পাতলা করে দিন।"},
+        {"stage": "Flowering & Pod Formation", "days": "35-65", "advisory_en": "Critical irrigation stage. High risk of aphid attack during cloudy days.", "advisory_bn": "এই সময় জমিতে হালকা সেচ দিন। মেঘলা আবহাওয়ায় জাব পোকার আক্রমণ লক্ষ্য করুন।"},
+        {"stage": "Pod Filling & Maturity", "days": "65-100", "advisory_en": "Harvest when 75% pods turn yellowish-brown to avoid shattering.", "advisory_bn": "৭৫% শুঁটি হলুদ-বাদামী হলে ফসল তুলুন যাতে বীজ ঝরে না পড়ে।"}
+      ],
+      "common_diseases": [
+        {
+          "name_en": "White Rust",
+          "name_bn": "সাদা মরিচা রোগ (White Rust)",
+          "pathogen": "Albugo candida",
+          "symptoms_en": "White blister-like pustules on undersides of leaves and floral malformation (staghead).",
+          "symptoms_bn": "পাতার নিচে সাদা ফোস্কার মতো দাগ এবং ফুলের বিকৃতি ঘটে।",
+          "severity": "Moderate",
+          "ipm_measures_en": "Spray Metalaxyl 8% + Mancozeb 64% (2g/L) or Mancozeb (2g/L).",
+          "ipm_measures_bn": "মেটালাক্সিল+মেনকোজেব (২ গ্রাম/লিটার) স্প্রে করুন।"
+        }
+      ],
+      "common_pests": [
+        {
+          "name_en": "Mustard Aphid",
+          "name_bn": "সরিষার জাব পোকা (Mustard Aphid)",
+          "symptoms_en": "Colonies of tiny green/brown aphids clustering on flowering shoots and pods, sucking sap.",
+          "symptoms_bn": "কচি ফুল ও শুঁটিতে দলে দলে জাব পোকা বসে রস চুষে শুকিয়ে দেয়।",
+          "ipm_measures_en": "Spray Neem oil 5ml/L at early appearance. If severe, spray Dimethoate 30% EC (1.5ml/L) or Thiamethoxam 25% WG (0.3g/L) in late afternoon.",
+          "ipm_measures_bn": "প্রাথমিক অবস্থায় নিম তেল স্প্রে করুন। আক্রমণ বেশি হলে থায়ামেথোক্সাম (০.৩ গ্রাম/লিটার) বিকেলের দিকে স্প্রে করুন।"
+        }
+      ]
+    },
+    "tomato": {
+      "name_en": "Tomato",
+      "name_bn": "টমেটো",
+      "aliases": ["tomato", "tamatar", "টমেটো"],
+      "season": "Rabi (Winter), Summer, Kharif",
+      "sowing_period": "Winter: Sept-Oct nursery; Summer: Jan-Feb",
+      "harvesting_period": "70-90 days after transplanting, continuous picking",
+      "ideal_soil": "Well-drained sandy loam rich in organic matter, pH 6.0 - 7.0",
+      "water_requirement": "400-600 mm. Drip irrigation or regular light furrow irrigation.",
+      "fertilizer_recommendation": {
+        "per_acre": {
+          "nitrogen_kg": 50,
+          "phosphorus_kg": 25,
+          "potassium_kg": 50,
+          "commercial_units": "Urea: 110 kg (split into 3 doses), SSP: 155 kg (all basal), MOP: 85 kg (split)"
+        },
+        "per_bigha_bengal": {
+          "description": "For 1 Bigha (0.33 acre) in West Bengal:",
+          "urea_kg": 36,
+          "ssp_kg": 52,
+          "mop_kg": 28,
+          "calcium_boron_foliar": "Foliar spray of Calcium Nitrate + Boron during fruit set prevents blossom end rot"
+        }
+      },
+      "growth_stages": [
+        {"stage": "Nursery & Transplanting", "days": "0-30", "advisory_en": "Hardened seedlings, transplant in afternoon.", "advisory_bn": "বিকেলের দিকে সুস্থ চারা রোপণ করুন।"},
+        {"stage": "Vegetative & Staking", "days": "30-55", "advisory_en": "Provide bamboo stakes for indeterminate varieties.", "advisory_bn": "গাছে বাঁশের খুঁটি ও সুতলি দিয়ে ঠেকনা দিন।"},
+        {"stage": "Flowering & Fruit Setting", "days": "55-80", "advisory_en": "Ensure micronutrients (Boron/Calcium) to prevent blossom end rot.", "advisory_bn": "ফুল ও ফল ধরার সময় বোরন ও ক্যালসিয়াম স্প্রে করুন।"},
+        {"stage": "Harvesting", "days": "80-120", "advisory_en": "Pick fruits at breaker stage for distant transport or red ripe for local market.", "advisory_bn": "বাজারের চাহিদা অনুযায়ী হালকা পাকা বা লাল পাকা অবস্থায় তুলুন।"}
+      ],
+      "common_diseases": [
+        {
+          "name_en": "Early Blight / Leaf Spot",
+          "name_bn": "টমেটোর আগাম ধসা / পাতার দাগ",
+          "pathogen": "Alternaria solani",
+          "symptoms_en": "Target-like concentric ring brown spots on leaves, yellowing surrounding tissue.",
+          "symptoms_bn": "পাতায় গোল বৃত্তাকার বাদামী দাগ এবং চারপাশ হলুদ হয়ে যায়।",
+          "severity": "Moderate",
+          "ipm_measures_en": "Prune bottom leaves. Spray Mancozeb 2g/L or Azoxystrobin + Difenoconazole 1ml/L.",
+          "ipm_measures_bn": "নিচের আক্রান্ত পাতা ছেঁটে ফেলুন। মেনকোজেব (২ গ্রাম/লিটার) স্প্রে করুন।"
+        },
+        {
+          "name_en": "Tomato Leaf Curl Virus (TLCV)",
+          "name_bn": "টমেটোর পাতা কোঁকড়ানো রোগ (Leaf Curl)",
+          "pathogen": "Begomovirus (transmitted by Whitefly)",
+          "symptoms_en": "Upward curling, puckering, thickening of leaves, stunted plant growth.",
+          "symptoms_bn": "পাতা উপরের দিকে কোঁকড়ানো, খসখসে ও গাছ খর্বাকৃতি হয়ে যাওয়া (সাদা মাছির মাধ্যমে ছড়ায়)।",
+          "severity": "Severe",
+          "ipm_measures_en": "Control vector Whiteflies using yellow sticky traps and spray Acetamiprid 20% SP @ 0.5g/L or Diafenthiuron 50% WP @ 1g/L. Rogue out severely infected plants.",
+          "ipm_measures_bn": "সাদা মাছি নিয়ন্ত্রণের জন্য হলুদ ফাঁদ ও অ্যাসিটামিপ্রিড স্প্রে করুন। অতিরিক্ত আক্রান্ত গাছ উপড়ে ফেলুন।"
+        }
+      ],
+      "common_pests": [
+        {
+          "name_en": "Tomato Fruit Borer",
+          "name_bn": "টমেটোর ফল ছিদ্রকারী পোকা (Fruit Borer)",
+          "symptoms_en": "Caterpillar bores circular holes in fruits and feeds inside.",
+          "symptoms_bn": "শুঁয়োপোকা ফলে গোল ফুটো করে ভেতরের অংশ খায়।",
+          "ipm_measures_en": "Install pheromone traps (5/acre). Spray Emamectin Benzoate 5% SG (0.5g/L) or Chlorantraniliprole 18.5% SC (0.3ml/L).",
+          "ipm_measures_bn": "ফেরোমোন ফাঁদ লাগান। ইমামেকটিন বেনজোয়েট (০.৫ গ্রাম/লিটার) স্প্রে করুন।"
+        }
+      ]
+    },
+    "brinjal": {
+      "name_en": "Brinjal / Eggplant",
+      "name_bn": "বেগুন",
+      "aliases": ["brinjal", "eggplant", "baingan", "begun", "বেগুন"],
+      "season": "Year-round (Autumn-Winter, Spring-Summer, Rainy)",
+      "sowing_period": "June-July (Rainy), Oct-Nov (Winter), Feb-March (Summer)",
+      "harvesting_period": "60-70 days after transplanting, continues for 3-4 months",
+      "ideal_soil": "Silt loam to clay loam with rich organic matter, pH 5.5 - 6.8",
+      "water_requirement": "Regular irrigation every 5-7 days in summer, 10-12 days in winter.",
+      "fertilizer_recommendation": {
+        "per_acre": {
+          "nitrogen_kg": 45,
+          "phosphorus_kg": 25,
+          "potassium_kg": 25,
+          "commercial_units": "Urea: 100 kg (split), SSP: 155 kg, MOP: 42 kg"
+        },
+        "per_bigha_bengal": {
+          "description": "For 1 Bigha (0.33 acre) in West Bengal:",
+          "urea_kg": 33,
+          "ssp_kg": 52,
+          "mop_kg": 14
+        }
+      },
+      "growth_stages": [
+        {"stage": "Transplanting", "days": "0-25", "advisory_en": "Transplant 30-35 day old seedlings with 60x60 cm spacing.", "advisory_bn": "৩০-৩৫ দিনের সুস্থ চারা ৬০ সেমি দূরত্বে রোপণ করুন।"},
+        {"stage": "Flowering & Fruiting", "days": "45-90", "advisory_en": "Scout for shoot & fruit borer wilted shoots.", "advisory_bn": "ডগা ও ফল ছিদ্রকারী পোকার লক্ষণ পর্যবেক্ষণ করুন এবং শুকিয়ে যাওয়া ডগা কেটে দিন।"}
+      ],
+      "common_diseases": [
+        {
+          "name_en": "Bacterial Wilt",
+          "name_bn": "ব্যাকটেরিয়াল উইল্ট / ঝিমিয়ে পড়া রোগ",
+          "pathogen": "Ralstonia solanacearum",
+          "symptoms_en": "Sudden wilting of whole plant during daytime without initial yellowing.",
+          "symptoms_bn": "গাছের পাতা হলুদ না হয়েই হঠাৎ করে দিনের বেলায় সম্পূর্ণ গাছ ঝিমিয়ে মরে যায়।",
+          "severity": "Severe",
+          "ipm_measures_en": "Crop rotation with non-solanaceous crops. Drench root zone with Streptocycline (1g/10L) + Copper Oxychloride (25g/10L). Use resistant varieties (e.g., Muktakeshi).",
+          "ipm_measures_bn": "স্ট্রেপ্টোসাইক্লিন ও কপার অক্সিক্লোরাইড মিশিয়ে গাছের গোড়ায় ঢালুন। প্রতিরোধী জাত ব্যবহার করুন।"
+        }
+      ],
+      "common_pests": [
+        {
+          "name_en": "Brinjal Shoot & Fruit Borer (BSFB)",
+          "name_bn": "বেগুনের ডগা ও ফল ছিদ্রকারী পোকা",
+          "symptoms_en": "Wilting of growing shoots in early stage; bore holes in fruits plugged with excreta.",
+          "symptoms_bn": "কচি ডগা শুকিয়ে হেলে পড়ে এবং বেগুনের গায়ে ছিদ্র ও পোকার মল দেখা যায়।",
+          "ipm_measures_en": "Clip off wilted shoots weekly with larva and destroy. Install Lucin-lure pheromone traps (10/acre). Spray Spinosad 45% SC @ 0.4ml/L or Chlorantraniliprole @ 0.3ml/L.",
+          "ipm_measures_bn": "আক্রান্ত ডগা কেটে ধ্বংস করুন। লিউসিন-লিউয়ার ফেরোমোন ট্র্যাপ ব্যবহার করুন। স্পিনোস্যাড (০.৪ মিলি/লিটার) স্প্রে করুন।"
+        }
+      ]
+    },
+    "jute": {
+      "name_en": "Jute",
+      "name_bn": "পাট",
+      "aliases": ["jute", "pat", "পাট", "তোষা পাট"],
+      "season": "Pre-Kharif / Zaid",
+      "sowing_period": "Mid March to April (Tosho: April-May)",
+      "harvesting_period": "July to August (110-120 days at small pod stage)",
+      "ideal_soil": "Alluvial, sandy loam to clay loam, pH 6.0 - 7.5",
+      "water_requirement": "500 mm. Requires rainfall or early irrigation for establishment.",
+      "fertilizer_recommendation": {
+        "per_acre": {
+          "nitrogen_kg": 25,
+          "phosphorus_kg": 12,
+          "potassium_kg": 15,
+          "commercial_units": "Urea: 55 kg (split into 2-3 doses), SSP: 75 kg, MOP: 25 kg"
+        },
+        "per_bigha_bengal": {
+          "description": "For 1 Bigha in West Bengal:",
+          "urea_kg": 18,
+          "ssp_kg": 25,
+          "mop_kg": 8
+        }
+      },
+      "growth_stages": [
+        {"stage": "Sowing & Weeding", "days": "0-30", "advisory_en": "Two weedings and thinning to 7-10 cm spacing.", "advisory_bn": "আগাছা পরিষ্কার করুন ও চারা ঘন হলে পাতলা করে দিন।"},
+        {"stage": "Rapid Vegetative Growth", "days": "30-90", "advisory_en": "Apply top dressing urea after weeding.", "advisory_bn": "নিড়ানির পর ইউরিয়া উপরিপ্রয়োগ করুন।"},
+        {"stage": "Harvesting & Retting", "days": "110-120", "advisory_en": "Harvest at 50% flowering. Ret in clean, slow-moving water with CRIJAF Sona microbial consortium for fast retting and golden fiber.", "advisory_bn": "৫০% ফুল আসার সময় পাট কাটুন। ক্রিজাফ সোনা (CRIJAF Sona) ব্যবহার করে দ্রুত ও সোনালী আঁশ পান।"}
+      ],
+      "common_diseases": [
+        {
+          "name_en": "Stem Rot / Root Rot",
+          "name_bn": "পাটের কাণ্ড পচা / গোড়া পচা রোগ",
+          "pathogen": "Macrophomina phaseolina",
+          "symptoms_en": "Brown to black lesions on stem, shredding of bark, wilting of plants.",
+          "symptoms_bn": "গাছের কাণ্ডে কালচে বাদামী দাগ ও আঁশ পচে যাওয়া।",
+          "severity": "Moderate",
+          "ipm_measures_en": "Seed treatment with Carbendazim 2g/kg seed. Spray Carbendazim + Mancozeb 2g/L if stem rot occurs.",
+          "ipm_measures_bn": "বীজ শোধন করুন এবং মেনকোজেব স্প্রে করুন।"
+        }
+      ],
+      "common_pests": [
+        {
+          "name_en": "Yellow Mite & Semilooper",
+          "name_bn": "হলুদ মাকড় ও পাটের বিছা পোকা (Semilooper)",
+          "symptoms_en": "Downward curling and copper color of apical leaves (yellow mite); leaves eaten (semilooper).",
+          "symptoms_bn": "কচি পাতা তামাটে ও নিচের দিকে কোঁকড়ায় (মাকড়); পাতা কেটে ছিবড়ে বানায় (বিছা পোকা)।",
+          "ipm_measures_en": "For mites: Spray Spiromesifen 22.9% SC @ 1ml/L or wettable sulphur @ 3g/L. For semilooper: Spray Profenophos 50% EC @ 2ml/L.",
+          "ipm_measures_bn": "মাকড়ের জন্য সালফার (৩ গ্রাম/লিটার) এবং পোকার জন্য প্রফেনোফস স্প্রে করুন।"
+        }
+      ]
+    }
+  }
+}
