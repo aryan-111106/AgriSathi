@@ -474,14 +474,21 @@ class AIOrchestrator:
             trans_res = await voice_service.transcribe_audio(audio_bytes, expected_lang=farmer.preferred_language)
             message_text = trans_res.get("transcript", message_text)
 
-        # Language preference update or auto-detect
-        lang = self.detect_language(message_text, default_lang=farmer.preferred_language)
-        farmer.preferred_language = lang
-        await db.commit()
+        # Language resolution priority:
+        #   1. Already-onboarded farmer → respect their stored preference
+        #   2. New farmer → auto-detect from their first message
+        if farmer.is_onboarded and farmer.preferred_language in ("bn", "en"):
+            lang = farmer.preferred_language
+        else:
+            lang = self.detect_language(message_text, default_lang=settings.default_language)
+            if farmer.preferred_language != lang:
+                farmer.preferred_language = lang
+                await db.commit()
 
         # Handle Onboarding Flow if farmer is not yet onboarded
         if not farmer.is_onboarded and not image_bytes:
-            if message_text.lower().strip() in ["hi", "hello", "নমস্কার", "start", "শুরু"] and farmer.onboarding_step == 0:
+            trigger = message_text.lower().strip()
+            if trigger in ["/start", "/menu", "hi", "hello", "নমস্কার", "start", "শুরু"] and farmer.onboarding_step == 0:
                 welcome_text = (
                     "🌾 *নমস্কার! AgriSaathi (কৃষি সাথী)-তে আপনাকে স্বাগতম।*\n"
                     "আপনার পছন্দের ভাষা বেছে নিন / Choose your preferred language:"
@@ -499,6 +506,12 @@ class AIOrchestrator:
                 await _bus().send_buttons(farmer.phone, reply_text, buttons)
             else:
                 await _bus().send_text(farmer.phone, reply_text)
+            # When onboarding just completed, attach the persistent reply keyboard
+            if completed and farmer.is_onboarded:
+                from app.services.telegram_service import telegram_service
+                await telegram_service.send_main_keyboard(
+                    farmer.phone, farmer.preferred_language
+                )
             return {"status": "onboarding", "from_phone": farmer.phone, "completed": completed, "response": reply_text}
 
         # Intent classification
@@ -525,13 +538,19 @@ class AIOrchestrator:
         final_response_text = ""
         tool_data = {}
 
-        # 1. GREETING
+        # 1. GREETING (also handles /start for already-onboarded farmers)
         if intent == "GREETING":
             final_response_text = self.get_main_menu(lang, farmer.name)
+            if farmer.is_onboarded:
+                # Re-attach the persistent reply keyboard for discoverability
+                from app.services.telegram_service import telegram_service
+                await telegram_service.send_main_keyboard(farmer.phone, lang)
 
         # 2. MENU
         elif intent == "MENU":
             final_response_text = self.get_main_menu(lang, farmer.name)
+            from app.services.telegram_service import telegram_service
+            await telegram_service.send_main_keyboard(farmer.phone, lang)
 
         # 3. WEATHER
         elif intent == "WEATHER":
