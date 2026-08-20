@@ -50,6 +50,21 @@ async def _register_telegram_webhook() -> None:
         logger.error(f"Failed to register Telegram webhook: {e}")
 
 
+async def _register_telegram_menu() -> None:
+    """Register the BotFather Menu Button commands (shown to users automatically)."""
+    if not settings.telegram_bot_token:
+        return
+    try:
+        from app.services.telegram_service import telegram_service, TELEGRAM_COMMANDS
+        result = await telegram_service.set_my_commands(TELEGRAM_COMMANDS)
+        if result.get("status") == "mock_sent":
+            logger.info(f"Telegram bot commands registered (mock): {len(TELEGRAM_COMMANDS)} commands")
+        else:
+            logger.info(f"Telegram bot commands registered: {len(TELEGRAM_COMMANDS)} commands")
+    except Exception as e:
+        logger.error(f"Failed to register Telegram commands: {e}")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Initializing AgriSaathi Database...")
@@ -57,6 +72,7 @@ async def lifespan(app: FastAPI):
     await ensure_schema()
     logger.info("AgriSaathi Backend initialized successfully.")
     await _register_telegram_webhook()
+    await _register_telegram_menu()
     yield
     logger.info("Shutting down AgriSaathi Backend...")
 
