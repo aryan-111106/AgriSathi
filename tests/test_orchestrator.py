@@ -219,14 +219,15 @@ async def test_start_routes_to_language_for_new_farmer(test_db):
     """/start for an unonboarded farmer must trigger the language picker."""
     phone = "910000006666"
     r = await ai_orchestrator.process_message(test_db, phone, "/start")
-    # Status should be onboarding_started (language picker sent)
     assert r["status"] == "onboarding_started"
 
 
 @pytest.mark.asyncio
-async def test_start_routes_to_menu_for_onboarded_farmer(test_db):
-    """/start for an already-onboarded farmer must send the menu + keyboard."""
+async def test_start_always_reprompts_language_even_after_onboarding(test_db):
+    """/start ALWAYS resets to the language picker, even for fully onboarded
+    farmers. This makes /start behave like a true "restart" affordance."""
     phone = "910000007777"
+    # Full onboarding in English
     await ai_orchestrator.process_message(test_db, phone, "English")
     await ai_orchestrator.process_message(test_db, phone, "Hooghly")
     await ai_orchestrator.process_message(test_db, phone, "Arambagh")
@@ -235,10 +236,50 @@ async def test_start_routes_to_menu_for_onboarded_farmer(test_db):
     await ai_orchestrator.process_message(test_db, phone, "Rice")
     await ai_orchestrator.process_message(test_db, phone, "skip")
 
+    # Verify farmer was onboarded
+    from sqlalchemy import select
+    from app.models import FarmerProfile
+    stmt = select(FarmerProfile).where(FarmerProfile.phone == phone)
+    res = await test_db.execute(stmt)
+    farmer = res.scalar_one()
+    assert farmer.is_onboarded is True
+
+    # Now send /start — should reset to language picker
     r = await ai_orchestrator.process_message(test_db, phone, "/start")
-    # After onboarding, /start should reach the GREETING intent path
-    assert r["status"] == "success"
-    assert r["intent"] == "GREETING"
+    assert r["status"] == "onboarding_started"
+
+    # Verify farmer is back to step 0 and not onboarded
+    stmt = select(FarmerProfile).where(FarmerProfile.phone == phone)
+    res = await test_db.execute(stmt)
+    farmer = res.scalar_one()
+    assert farmer.is_onboarded is False
+    assert farmer.onboarding_step == 0
+
+
+@pytest.mark.asyncio
+async def test_language_command_resets_picker_without_losing_farmer(test_db):
+    """/language re-prompts language but keeps the farmer record (phone key)."""
+    phone = "910000009999"
+    await ai_orchestrator.process_message(test_db, phone, "English")
+    await ai_orchestrator.process_message(test_db, phone, "Hooghly")
+    await ai_orchestrator.process_message(test_db, phone, "Arambagh")
+    await ai_orchestrator.process_message(test_db, phone, "Singur")
+    await ai_orchestrator.process_message(test_db, phone, "2 bigha")
+    await ai_orchestrator.process_message(test_db, phone, "Rice")
+    await ai_orchestrator.process_message(test_db, phone, "skip")
+
+    # Send /language
+    r = await ai_orchestrator.process_message(test_db, phone, "/language")
+    assert r["status"] == "language_pick"
+
+    # Farmer row must still exist (PK is phone)
+    from sqlalchemy import select
+    from app.models import FarmerProfile
+    stmt = select(FarmerProfile).where(FarmerProfile.phone == phone)
+    res = await test_db.execute(stmt)
+    farmer = res.scalar_one()
+    assert farmer.is_onboarded is False  # reset
+    assert farmer.onboarding_step == 0
 
 
 @pytest.mark.asyncio
