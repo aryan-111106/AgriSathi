@@ -65,3 +65,54 @@ async def test_download_file_returns_none_when_unconfigured():
     svc.token = None
     res = await svc.download_file("any_file_id")
     assert res is None
+
+
+def test_telegram_commands_have_required_fields():
+    """Every BotFather menu command must have 'command' and 'description'."""
+    from app.services.telegram_service import TELEGRAM_COMMANDS
+    assert len(TELEGRAM_COMMANDS) >= 9
+    for cmd in TELEGRAM_COMMANDS:
+        assert "command" in cmd
+        assert "description" in cmd
+        # Telegram limits command names to 32 chars
+        assert len(cmd["command"]) <= 32
+        # Description limit is 256 chars
+        assert len(cmd["description"]) <= 256
+
+
+def test_telegram_commands_have_no_duplicates():
+    from app.services.telegram_service import TELEGRAM_COMMANDS
+    names = [c["command"] for c in TELEGRAM_COMMANDS]
+    assert len(names) == len(set(names)), f"Duplicate commands: {names}"
+
+
+@pytest.mark.asyncio
+async def test_set_my_commands_mock_when_unconfigured():
+    svc = TelegramService()
+    svc.token = None
+    res = await svc.set_my_commands([{"command": "start", "description": "Start"}])
+    assert res["status"] == "mock_sent"
+
+
+@pytest.mark.asyncio
+async def test_send_main_keyboard_bengali():
+    svc = TelegramService()
+    svc.token = None
+    res = await svc.send_main_keyboard("123", lang="bn")
+    assert res["status"] == "mock_sent"
+
+
+@pytest.mark.asyncio
+async def test_send_main_keyboard_english():
+    svc = TelegramService()
+    svc.token = None
+    res = await svc.send_main_keyboard("123", lang="en")
+    assert res["status"] == "mock_sent"
+
+
+@pytest.mark.asyncio
+async def test_remove_keyboard():
+    svc = TelegramService()
+    svc.token = None
+    res = await svc.remove_keyboard("123")
+    assert res["status"] == "mock_sent"
