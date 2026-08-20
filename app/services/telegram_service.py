@@ -174,5 +174,78 @@ class TelegramService:
             logger.error(f"download_file({file_id}) failed: {e}")
             return None
 
+    async def set_my_commands(self, commands: List[Dict[str, str]]) -> Dict[str, Any]:
+        """Register BotFather Menu Button commands.
+
+        Telegram auto-shows a "Menu" button next to the input field; tapping
+        it pops up this command list. Telegram picks the localized description
+        that matches the user's client language automatically.
+        """
+        if not self.is_configured:
+            logger.info(f"[MOCK setMyCommands] {len(commands)} commands")
+            return {"status": "mock_sent", "commands": commands}
+        return await self._post("setMyCommands", {"commands": commands})
+
+    async def send_main_keyboard(
+        self,
+        chat_id: str,
+        lang: str = "bn",
+    ) -> Dict[str, Any]:
+        """Send a persistent ReplyKeyboardMarkup with 9 main-feature buttons
+        arranged in a 3x3 grid. Stays visible until farmer hides it manually
+        or the bot sends `remove_keyboard`.
+        """
+        if lang == "bn":
+            rows = [
+                [{"text": "🌦️ আবহাওয়া"}, {"text": "💰 বাজার দর"}, {"text": "🌱 ফসল পরামর্শ"}],
+                [{"text": "📷 রোগ নির্ণয়"}, {"text": "🐛 পোকা নিয়ন্ত্রণ"}, {"text": "🧪 সারের হিসাব"}],
+                [{"text": "📊 চাষের খরচ-লাভ"}, {"text": "🏛️ সরকারি প্রকল্প"}, {"text": "👨‍🌾 বিশেষজ্ঞ"}],
+            ]
+            header = "🌾 AgriSaathi মেনু — যেকোনো বাটন চাপুন অথবা সরাসরি প্রশ্ন লিখুন:"
+        else:
+            rows = [
+                [{"text": "🌦️ Weather"}, {"text": "💰 Mandi Prices"}, {"text": "🌱 Crop Advice"}],
+                [{"text": "📷 Disease Diagnosis"}, {"text": "🐛 Pest Control"}, {"text": "🧪 Fertilizer"}],
+                [{"text": "📊 Farm Economics"}, {"text": "🏛️ Govt Schemes"}, {"text": "👨‍🌾 Expert"}],
+            ]
+            header = "🌾 AgriSaathi Menu — tap a button or type your question:"
+
+        payload = {
+            "chat_id": chat_id,
+            "text": header,
+            "reply_markup": {
+                "keyboard": rows,
+                "resize_keyboard": True,
+                "is_persistent": True,
+                "selective": False,
+            },
+        }
+        return await self._post("sendMessage", payload)
+
+    async def remove_keyboard(self, chat_id: str, text: str = " ") -> Dict[str, Any]:
+        """Hide the persistent reply keyboard for this chat."""
+        payload = {
+            "chat_id": chat_id,
+            "text": text,
+            "reply_markup": {"remove_keyboard": True, "selective": False},
+        }
+        return await self._post("sendMessage", payload)
+
+
+# Module-level BotFather menu definition (9 commands, bilingual descriptions).
+# Telegram auto-shows the language that matches the user's client locale.
+TELEGRAM_COMMANDS: List[Dict[str, str]] = [
+    {"command": "start", "description": "🌾 শুরু / Start — Restart or resume"},
+    {"command": "weather", "description": "🌦️ আবহাওয়া / Weather forecast"},
+    {"command": "mandi", "description": "💰 বাজার দর / Mandi market prices"},
+    {"command": "crop", "description": "🌱 ফসল পরামর্শ / Crop advice"},
+    {"command": "disease", "description": "📷 রোগ নির্ণয় / Disease diagnosis"},
+    {"command": "pest", "description": "🐛 পোকা নিয়ন্ত্রণ / Pest control"},
+    {"command": "fertilizer", "description": "🧪 সারের হিসাব / Fertilizer calculator"},
+    {"command": "economy", "description": "📊 চাষের খরচ-লাভ / Farm economics"},
+    {"command": "schemes", "description": "🏛️ সরকারি প্রকল্প / Govt schemes"},
+    {"command": "expert", "description": "👨‍🌾 বিশেষজ্ঞ / Agricultural expert"},
+]
+
 
 telegram_service = TelegramService()
