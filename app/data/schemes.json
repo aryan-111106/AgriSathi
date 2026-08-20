@@ -1,0 +1,78 @@
+{
+  "schemes": [
+    {
+      "id": "krishak_bandhu",
+      "name_en": "Krishak Bandhu Scheme (West Bengal)",
+      "name_bn": "কৃষক বন্ধু প্রকল্প (পশ্চিমবঙ্গ সরকার)",
+      "sponsor": "Government of West Bengal",
+      "category": "Direct Income Support & Life Insurance",
+      "eligibility_en": "All resident farmers and recorded Bhagchasi (sharecroppers) in West Bengal holding agricultural land.",
+      "eligibility_bn": "পশ্চিমবঙ্গের সমস্ত কৃষক ও নথিবদ্ধ বর্গাদার কৃষক যাদের নিজস্ব কৃষিজমি আছে।",
+      "benefits_en": "1. Assured Financial Assistance: Up to ₹10,000 per year for 1 acre or more (₹5,000 in Kharif + ₹5,000 in Rabi). Pro-rata minimum ₹4,000/year for land less than 1 acre.\n2. Death Benefit (Krishak Bandhu Death Benefit): One-time ₹2,00,000 financial support to the nominee on the death of a registered farmer aged 18-60 years.",
+      "benefits_bn": "১. বার্ষিক আর্থিক অনুদান: ১ একর বা তার বেশি জমিতে বছরে সর্বোচ্চ ১০,০০০ টাকা (খরিফ ও রবি মরশুমে ৫,০০০ করে)। ১ একরের কম জমিতে ন্যূনতম ৪,০০০ টাকা।\n২. মৃত্যুজনিত অনুদান: ১৮-৬০ বছর বয়সী কৃষক মারা গেলে পরিবারকে ২,০০,০০০ টাকার এককালীন সাহায্য।",
+      "documents_required_en": "RoR (Khatian/Parcha), Aadhaar card, Voter ID, Bank passbook, Passport size photo, Mobile number.",
+      "documents_required_bn": "জমির পরচা (খতিয়ান), আধার কার্ড, ভোটার কার্ড, ব্যাংক পাসবই, ছবি, মোবাইল নম্বর।",
+      "how_to_apply_en": "Visit the local Assistant Director of Agriculture (ADA) office in your Block or through Duare Sarkar camps, or online at https://krishakbandhu.wb.gov.in",
+      "how_to_apply_bn": "ব্লকের সহ-কৃষি অধিকর্তা (ADA) অফিস বা দুয়ারে সরকার ক্যাম্প বা krishakbandhu.wb.gov.in পোর্টালে যোগাযোগ করুন।"
+    },
+    {
+      "id": "bangla_shasya_bima",
+      "name_en": "Bangla Shasya Bima (BSB Crop Insurance)",
+      "name_bn": "বাংলা শস্য বীমা (BSB)",
+      "sponsor": "Government of West Bengal",
+      "category": "Crop Insurance",
+      "eligibility_en": "All farmers (loanee and non-loanee, sharecroppers/tenants) growing notified crops (Paddy, Potato, Mustard, Jute, etc.) in notified areas in West Bengal.",
+      "eligibility_bn": "পশ্চিমবঙ্গের সমস্ত কৃষক (ঋণগ্রহীতা ও অ-ঋণগ্রহীতা) এবং বর্গাদাররা যারা বিজ্ঞাপিত ফসল চাষ করেন।",
+      "benefits_en": "100% premium is paid by the West Bengal State Government for all major crops (except commercial/horticultural crops where government pays majority). Full compensation for localized disaster, prevented sowing, mid-season adversity, and post-harvest losses.",
+      "benefits_bn": "রাজ্য সরকার কৃষকের হয়ে বীমার প্রিমিয়ামের সম্পূর্ণ ১০০% টাকা প্রদান করে (ফসলহানি হলে ক্ষতিপূরণ সরাসরি ব্যাংক অ্যাকাউন্টে জমা হয়)।",
+      "documents_required_en": "Application form, Land documents (Parcha) or Certificate from Gram Panchayat/ADA for sharecroppers, Aadhaar, Voter Card, Bank Passbook.",
+      "documents_required_bn": "আবেদনপত্র, জমির পরচা বা পঞ্চায়েতের সংশাপত্র, আধার, ভোটার কার্ড, ব্যাংক পাসবই।",
+      "how_to_apply_en": "Apply through Block ADA office, Gram Panchayat, Duare Sarkar, or online at https://bsb.wb.gov.in",
+      "how_to_apply_bn": "ব্লক কৃষি অফিস (ADA), পঞ্চায়েত, দুয়ারে সরকার অথবা bsb.wb.gov.in থেকে আবেদন করা যায়।"
+    },
+    {
+      "id": "pm_kisan",
+      "name_en": "PM-Kisan Samman Nidhi",
+      "name_bn": "পিএম কিষাণ সম্মান নিধি (PM-KISAN)",
+      "sponsor": "Central Government of India",
+      "category": "Direct Income Support",
+      "eligibility_en": "All landholding farmer families across India with cultivable land in their names (subject to exclusion criteria like institutional landholders, income tax payers).",
+      "eligibility_bn": "ভারতে বসবাসকারী সমস্ত কৃষক পরিবার যাদের নামে চাষযোগ্য জমি আছে।",
+      "benefits_en": "₹6,000 per year directly transferred to the farmer's bank account in 3 equal four-monthly installments of ₹2,000 each.",
+      "benefits_bn": "বছরে ৬,০০০ টাকা ৩টি সমান কিস্তিতে (প্রতি কিস্তিতে ২,০০০ টাকা করে) সরাসরি ব্যাংক অ্যাকাউন্টে জমা হয়।",
+      "documents_required_en": "Aadhaar card, Land ownership record (Khatian), Bank Account linked with Aadhaar & NPCI, Active mobile number.",
+      "documents_required_bn": "আধার কার্ড, জমির খতিয়ান, আধার লিঙ্কযুক্ত ব্যাংক অ্যাকাউন্ট, মোবাইল নম্বর।",
+      "how_to_apply_en": "Apply via PM-Kisan Portal (https://pmkisan.gov.in), Common Service Centres (CSC), or through State Nodal Officer.",
+      "how_to_apply_bn": "pmkisan.gov.in পোর্টাল অথবা নিকটবর্তী CSC সেন্টারের মাধ্যমে আবেদন ও e-KYC সম্পন্ন করুন।"
+    },
+    {
+      "id": "soil_health_card",
+      "name_en": "Soil Health Card Scheme",
+      "name_bn": "মাটি স্বাস্থ্য কার্ড প্রকল্প (Soil Health Card)",
+      "sponsor": "Central & State Government",
+      "category": "Soil Testing & Nutrient Management",
+      "eligibility_en": "All farmers in India.",
+      "eligibility_bn": "সমস্ত কৃষক ভাই ও বোনেরা।",
+      "benefits_en": "Free scientific soil testing report showing 12 parameters (N, P, K, S, Zn, Fe, Cu, Mn, Bo, pH, EC, OC) and customized fertilizer dosage recommendations.",
+      "benefits_bn": "জমির মাটির ১২টি গুণের পরীক্ষা করে মাটির স্বাস্থ্য কার্ড এবং সঠিক সার ব্যবহারের পরামর্শ বিনামূল্যে দেওয়া হয়।",
+      "documents_required_en": "Soil sample from field with farmer name, village, and survey/khatian number.",
+      "documents_required_bn": "জমির মাটির নমুনা, জমির দাগ নম্বর ও কৃষকের বিবরণ।",
+      "how_to_apply_en": "Submit soil sample to local Block Agriculture Office or Krishi Vigyan Kendra (KVK).",
+      "how_to_apply_bn": "নিকটবর্তী ব্লক কৃষি অফিস বা কৃষি বিজ্ঞান কেন্দ্র (KVK)-এ যোগাযোগ করুন।"
+    },
+    {
+      "id": "farm_mechanization_smam",
+      "name_en": "Agricultural Mechanization & Custom Hiring Centres (FSSM / SMAM / CHC)",
+      "name_bn": "কৃষি যন্ত্রাদি অনুদান ও ভাড়া কেন্দ্র (FSSM / CHC)",
+      "sponsor": "Government of West Bengal & Central Govt",
+      "category": "Machinery Subsidy",
+      "eligibility_en": "Individual farmers, SHGs, FPOs, and Farmer Groups.",
+      "benefits_en": "40% to 50% subsidy on purchase of power tillers, tractors, transplanters, reapers, and sprayers. Up to 80% subsidy for setting up Custom Hiring Centres (CHC).",
+      "benefits_bn": "পাওয়ার টিলার, ট্র্যাক্টর, রিপার, স্প্রে মেশিনে ৪০% থেকে ৫০% সরকারি ভর্তুকি। কৃষি যন্ত্রপাতি ভাড়া কেন্দ্র (CHC) তৈরিতে ৮০% পর্যন্ত অনুদান।",
+      "documents_required_en": "Aadhaar, Land records, Bank Passbook, Quotation of authorized machine dealer.",
+      "documents_required_bn": "আধার কার্ড, জমির রেকর্ড, ব্যাংক পাসবই, কৃষি যন্ত্রের কোটেশন।",
+      "how_to_apply_en": "Apply through West Bengal Farm Mechanization portal (https://matirkatha.wb.gov.in) or Block ADA office.",
+      "how_to_apply_bn": "মাটির কথা পোর্টাল (matirkatha.wb.gov.in) অথবা ব্লক কৃষি অফিসে যোগাযোগ করুন।"
+    }
+  ]
+}
