@@ -173,7 +173,5 @@ WHATSAPP_PHONE_NUMBER_ID=...
 
 ## 👥 Contributors
 
-- **AI** — Architecture design, multi-phase implementation (MVP gap closure, Telegram migration, auto-migrations, language UX fixes), test suite, README.
-- **You** — Project vision, product decisions, real-world pilot access, ground-truth agricultural knowledge for West Bengal farmers.
-
-Want to contribute? Pick a ⏳ item from the checklist above and open an issue or PR.
+- **AI** — Architecture design, multi-phase implementation (MVP gap closure, Telegram migration, auto-migrations, language UX fixes), test suite.
+- **Aryan Prasad** — Project vision, product decisions, real-world pilot access, ground-truth agricultural knowledge for West Bengal farmers.
